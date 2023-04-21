@@ -11,7 +11,7 @@ import SwiftUI
 struct TodosMVVMWithCoreDataApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TodosView().environmentObject(TodosViewModel())
         }
     }
 }

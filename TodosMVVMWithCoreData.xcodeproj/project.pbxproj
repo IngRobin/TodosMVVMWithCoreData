@@ -8,12 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		6F5DF27129EA049900BC9FCF /* TodosMVVMWithCoreDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF27029EA049900BC9FCF /* TodosMVVMWithCoreDataApp.swift */; };
-		6F5DF27329EA049900BC9FCF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF27229EA049900BC9FCF /* ContentView.swift */; };
+		6F5DF27329EA049900BC9FCF /* TodosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF27229EA049900BC9FCF /* TodosView.swift */; };
 		6F5DF27529EA049B00BC9FCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DF27429EA049B00BC9FCF /* Assets.xcassets */; };
 		6F5DF27829EA049B00BC9FCF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F5DF27729EA049B00BC9FCF /* Preview Assets.xcassets */; };
 		6F5DF28229EA049B00BC9FCF /* TodosMVVMWithCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF28129EA049B00BC9FCF /* TodosMVVMWithCoreDataTests.swift */; };
 		6F5DF28C29EA049B00BC9FCF /* TodosMVVMWithCoreDataUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF28B29EA049B00BC9FCF /* TodosMVVMWithCoreDataUITests.swift */; };
 		6F5DF28E29EA049B00BC9FCF /* TodosMVVMWithCoreDataUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF28D29EA049B00BC9FCF /* TodosMVVMWithCoreDataUITestsLaunchTests.swift */; };
+		6F5DF29F29EA056200BC9FCF /* TodosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF29E29EA056200BC9FCF /* TodosViewModel.swift */; };
+		6F5DF2A129EA056B00BC9FCF /* TodosRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF2A029EA056B00BC9FCF /* TodosRepository.swift */; };
+		6F5DF2A329EA057500BC9FCF /* TodosDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF2A229EA057500BC9FCF /* TodosDatasource.swift */; };
+		6F5DF2A629EA059600BC9FCF /* PersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF2A529EA059600BC9FCF /* PersistentStore.swift */; };
+		6F5DF2A929EA070C00BC9FCF /* TodosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF2A729EA070C00BC9FCF /* TodosModel.xcdatamodeld */; };
+		6F5DF2AB29EA101B00BC9FCF /* TodoObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF2AA29EA101B00BC9FCF /* TodoObject.swift */; };
+		6F5DF2AE29EE129F00BC9FCF /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF2AD29EE129F00BC9FCF /* ErrorManager.swift */; };
+		6F5DF2B229F0503700BC9FCF /* TodosUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF2B129F0503700BC9FCF /* TodosUpdateView.swift */; };
+		6F5DF2B529F091D300BC9FCF /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF2B429F091D300BC9FCF /* Alerts.swift */; };
+		6F5DF2B729F09A8900BC9FCF /* TodosCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DF2B629F09A8900BC9FCF /* TodosCreateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +46,7 @@
 /* Begin PBXFileReference section */
 		6F5DF26D29EA049900BC9FCF /* TodosMVVMWithCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodosMVVMWithCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F5DF27029EA049900BC9FCF /* TodosMVVMWithCoreDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosMVVMWithCoreDataApp.swift; sourceTree = "<group>"; };
-		6F5DF27229EA049900BC9FCF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6F5DF27229EA049900BC9FCF /* TodosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosView.swift; sourceTree = "<group>"; };
 		6F5DF27429EA049B00BC9FCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F5DF27729EA049B00BC9FCF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6F5DF27D29EA049B00BC9FCF /* TodosMVVMWithCoreDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosMVVMWithCoreDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +54,16 @@
 		6F5DF28729EA049B00BC9FCF /* TodosMVVMWithCoreDataUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodosMVVMWithCoreDataUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F5DF28B29EA049B00BC9FCF /* TodosMVVMWithCoreDataUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosMVVMWithCoreDataUITests.swift; sourceTree = "<group>"; };
 		6F5DF28D29EA049B00BC9FCF /* TodosMVVMWithCoreDataUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosMVVMWithCoreDataUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6F5DF29E29EA056200BC9FCF /* TodosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosViewModel.swift; sourceTree = "<group>"; };
+		6F5DF2A029EA056B00BC9FCF /* TodosRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosRepository.swift; sourceTree = "<group>"; };
+		6F5DF2A229EA057500BC9FCF /* TodosDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosDatasource.swift; sourceTree = "<group>"; };
+		6F5DF2A529EA059600BC9FCF /* PersistentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStore.swift; sourceTree = "<group>"; };
+		6F5DF2A829EA070C00BC9FCF /* TodosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodosModel.xcdatamodel; sourceTree = "<group>"; };
+		6F5DF2AA29EA101B00BC9FCF /* TodoObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoObject.swift; sourceTree = "<group>"; };
+		6F5DF2AD29EE129F00BC9FCF /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
+		6F5DF2B129F0503700BC9FCF /* TodosUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosUpdateView.swift; sourceTree = "<group>"; };
+		6F5DF2B429F091D300BC9FCF /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		6F5DF2B629F09A8900BC9FCF /* TodosCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosCreateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +114,11 @@
 		6F5DF26F29EA049900BC9FCF /* TodosMVVMWithCoreData */ = {
 			isa = PBXGroup;
 			children = (
-				6F5DF27029EA049900BC9FCF /* TodosMVVMWithCoreDataApp.swift */,
-				6F5DF27229EA049900BC9FCF /* ContentView.swift */,
-				6F5DF27429EA049B00BC9FCF /* Assets.xcassets */,
 				6F5DF27629EA049B00BC9FCF /* Preview Content */,
+				6F5DF29D29EA04EA00BC9FCF /* Resources */,
+				6F5DF29C29EA04E500BC9FCF /* View */,
+				6F5DF29B29EA04DF00BC9FCF /* ViewModel */,
+				6F5DF29A29EA04D800BC9FCF /* Model */,
 			);
 			path = TodosMVVMWithCoreData;
 			sourceTree = "<group>";
@@ -125,6 +146,71 @@
 				6F5DF28D29EA049B00BC9FCF /* TodosMVVMWithCoreDataUITestsLaunchTests.swift */,
 			);
 			path = TodosMVVMWithCoreDataUITests;
+			sourceTree = "<group>";
+		};
+		6F5DF29A29EA04D800BC9FCF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DF2AA29EA101B00BC9FCF /* TodoObject.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6F5DF29B29EA04DF00BC9FCF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DF29E29EA056200BC9FCF /* TodosViewModel.swift */,
+				6F5DF2A029EA056B00BC9FCF /* TodosRepository.swift */,
+				6F5DF2A229EA057500BC9FCF /* TodosDatasource.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6F5DF29C29EA04E500BC9FCF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DF27229EA049900BC9FCF /* TodosView.swift */,
+				6F5DF2B129F0503700BC9FCF /* TodosUpdateView.swift */,
+				6F5DF2B629F09A8900BC9FCF /* TodosCreateView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6F5DF29D29EA04EA00BC9FCF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DF2B329F091C500BC9FCF /* Alerts */,
+				6F5DF2AC29EE128600BC9FCF /* Errors */,
+				6F5DF2A429EA058200BC9FCF /* DataManager */,
+				6F5DF27029EA049900BC9FCF /* TodosMVVMWithCoreDataApp.swift */,
+				6F5DF27429EA049B00BC9FCF /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6F5DF2A429EA058200BC9FCF /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DF2A529EA059600BC9FCF /* PersistentStore.swift */,
+				6F5DF2A729EA070C00BC9FCF /* TodosModel.xcdatamodeld */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		6F5DF2AC29EE128600BC9FCF /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DF2AD29EE129F00BC9FCF /* ErrorManager.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		6F5DF2B329F091C500BC9FCF /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DF2B429F091D300BC9FCF /* Alerts.swift */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +343,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F5DF27329EA049900BC9FCF /* ContentView.swift in Sources */,
+				6F5DF2AE29EE129F00BC9FCF /* ErrorManager.swift in Sources */,
+				6F5DF2AB29EA101B00BC9FCF /* TodoObject.swift in Sources */,
+				6F5DF27329EA049900BC9FCF /* TodosView.swift in Sources */,
+				6F5DF2B229F0503700BC9FCF /* TodosUpdateView.swift in Sources */,
+				6F5DF2A329EA057500BC9FCF /* TodosDatasource.swift in Sources */,
+				6F5DF2A629EA059600BC9FCF /* PersistentStore.swift in Sources */,
+				6F5DF2A129EA056B00BC9FCF /* TodosRepository.swift in Sources */,
+				6F5DF2A929EA070C00BC9FCF /* TodosModel.xcdatamodeld in Sources */,
+				6F5DF2B729F09A8900BC9FCF /* TodosCreateView.swift in Sources */,
+				6F5DF29F29EA056200BC9FCF /* TodosViewModel.swift in Sources */,
+				6F5DF2B529F091D300BC9FCF /* Alerts.swift in Sources */,
 				6F5DF27129EA049900BC9FCF /* TodosMVVMWithCoreDataApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -583,6 +679,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6F5DF2A729EA070C00BC9FCF /* TodosModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6F5DF2A829EA070C00BC9FCF /* TodosModel.xcdatamodel */,
+			);
+			currentVersion = 6F5DF2A829EA070C00BC9FCF /* TodosModel.xcdatamodel */;
+			path = TodosModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6F5DF26529EA049900BC9FCF /* Project object */;
 }
