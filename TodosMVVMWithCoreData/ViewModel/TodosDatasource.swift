@@ -17,7 +17,7 @@ protocol TodosDatasourceProtocol {
 }
 
 final class TodosDatasource: TodosDatasourceProtocol {
-
+    
     let persistentStore: PersistentStore
     
     init(persistentStore: PersistentStore = PersistentStore()) {
@@ -27,18 +27,35 @@ final class TodosDatasource: TodosDatasourceProtocol {
     func fetchTodos() async throws -> [NSManagedObject]{
         let todosFR = TodoMO.self.fetchRequest()
         do{
-            return try persistentStore.managedContext.fetch(todosFR)
+            return try persistentStore.persistentContainer.viewContext.fetch(todosFR)
         }catch let error{
             throw CoreDataError.fetchError(error)
         }
     }
     
     func createTodo(todo: TodoObject) async throws -> Bool {
-        let todoMO = TodoMO(context: persistentStore.managedContext)
-        todoMO.id = todo.id
-        todoMO.name = todo.name
-        todoMO.date = todo.date
-        return try await saveData()
+        //        let todoMO = TodoMO(context: persistentStore.managedContext)
+        //        todoMO.id = todo.id
+        //        todoMO.name = todo.name
+        //        todoMO.date = todo.date
+        //        return try await saveData()
+        
+        persistentStore.managedContext.performAndWait {
+            Task{
+                for i in 0..<100000 {
+                    let newTodo = TodoMO(context: self.persistentStore.managedContext)
+                    newTodo.name = "Todo \(i)"
+                    newTodo.date = Date()
+                    newTodo.id = UUID()
+                }
+                return try await self.saveData()
+                
+            }
+            return true
+        }
+        
+        
+//        return try await saveData()
     }
     
     func deleteTodo(todo: TodoObject) async throws -> Bool{
@@ -56,11 +73,13 @@ final class TodosDatasource: TodosDatasourceProtocol {
         update(nsManagedObject: todoMo, todo: todo)
         return try await saveData()
     }
-
+    
     private func saveData() async throws -> Bool{
         if persistentStore.managedContext.hasChanges {
+            
             do {
-                try persistentStore.managedContext.save()
+                try self.persistentStore.managedContext.save()
+                self.persistentStore.managedContext.reset()
                 return true
             } catch {
                 throw CoreDataError.saveDataError(error)
@@ -86,83 +105,83 @@ final class TodosDatasource: TodosDatasourceProtocol {
         nsManagedObject.name = todo.name
         nsManagedObject.date = todo.date
     }
-
     
-//    func fetchTodos<T: NSManagedObject>(completionHandler: @escaping (Result<[T]?, CoreDataError>) -> ()){
-//
-////        let todosFR = NSFetchRequest<T>(entityName: "TodoMO")
-//        let todosFR = TodoMO.self.fetchRequest()
-//        do {
-//            let todos = try persistentStore.managedContext.fetch(todosFR) as! [T]
-//            completionHandler(.success(todos))
-//        } catch let error {
-//            completionHandler(.failure(.fetchError(error)))
-//        }
-//    }
-//
-//    func createTodo(todo: TodoObject, completionHandler: @escaping (Result<Bool, CoreDataError>) -> ()){
-//        let todoMO = TodoMO(context: persistentStore.managedContext)
-//        todoMO.id = todo.id
-//        todoMO.name = todo.name
-//        todoMO.date = todo.date
-//        saveData(completionHandler: completionHandler)
-//
-//    }
-//
-//    func deleteTodo(todo: TodoObject, completionHandler: @escaping (Result<Bool, CoreDataError>) -> ()){
-//        fetchFirstObject(todo: todo) { result in
-//            switch result {
-//            case .failure(let error):
-//                completionHandler(.failure(error))
-//            case .success(let todoDelete):
-//                if let todoDelete = todoDelete{
-//                    self.persistentStore.managedContext.delete(todoDelete)
-//                    self.saveData(completionHandler: completionHandler)
-//                } else{
-//                    completionHandler(.failure(.corruptedDataError))
-//                }
-//
-//
-//            }
-//        }
-//    }
-//
-//    func updateTodo(todo: TodoObject, completionHandler: @escaping (Result<Bool, CoreDataError>) -> ()){
-//        fetchFirstObject(todo: todo) { result in
-//            switch result{
-//            case .success(let managedObject):
-//                self.update(nsManagedObject: managedObject as! TodoMO, todo: todo)
-//                self.saveData(completionHandler: completionHandler)
-//            case .failure(let error):
-//                completionHandler(.failure(error))
-//            }
-//        }
-//    }
-//
-//
-//    private func saveData(completionHandler: @escaping (Result<Bool, CoreDataError>) -> ()){
-//        if persistentStore.managedContext.hasChanges {
-//            do {
-//                try persistentStore.managedContext.save()
-//                print("Data saved successfully")
-//                completionHandler(.success(true))
-//
-//            } catch {
-//                completionHandler(.failure(.saveDataError(error)))
-//            }
-//        }
-//    }
-//
-//    private func fetchFirstObject<T: NSManagedObject>(todo: TodoObject, completionHandler: @escaping (Result<T?, CoreDataError>) -> ()){
-////        let fetchRequest = NSFetchRequest<T>(entityName: "TodoMO")
-//        let fetchRequest = TodoMO.self.fetchRequest()
-//        fetchRequest.predicate = NSPredicate(format: "id = %@", todo.id as CVarArg)
-//        fetchRequest.fetchLimit = 1
-//        do {
-//            let todoResult = try persistentStore.managedContext.fetch(fetchRequest) as! [T]
-//            completionHandler(.success(todoResult.first))
-//        } catch let error {
-//            completionHandler(.failure(.fetchFirstError(error)))
-//        }
-//    }
+    
+    //    func fetchTodos<T: NSManagedObject>(completionHandler: @escaping (Result<[T]?, CoreDataError>) -> ()){
+    //
+    ////        let todosFR = NSFetchRequest<T>(entityName: "TodoMO")
+    //        let todosFR = TodoMO.self.fetchRequest()
+    //        do {
+    //            let todos = try persistentStore.managedContext.fetch(todosFR) as! [T]
+    //            completionHandler(.success(todos))
+    //        } catch let error {
+    //            completionHandler(.failure(.fetchError(error)))
+    //        }
+    //    }
+    //
+    //    func createTodo(todo: TodoObject, completionHandler: @escaping (Result<Bool, CoreDataError>) -> ()){
+    //        let todoMO = TodoMO(context: persistentStore.managedContext)
+    //        todoMO.id = todo.id
+    //        todoMO.name = todo.name
+    //        todoMO.date = todo.date
+    //        saveData(completionHandler: completionHandler)
+    //
+    //    }
+    //
+    //    func deleteTodo(todo: TodoObject, completionHandler: @escaping (Result<Bool, CoreDataError>) -> ()){
+    //        fetchFirstObject(todo: todo) { result in
+    //            switch result {
+    //            case .failure(let error):
+    //                completionHandler(.failure(error))
+    //            case .success(let todoDelete):
+    //                if let todoDelete = todoDelete{
+    //                    self.persistentStore.managedContext.delete(todoDelete)
+    //                    self.saveData(completionHandler: completionHandler)
+    //                } else{
+    //                    completionHandler(.failure(.corruptedDataError))
+    //                }
+    //
+    //
+    //            }
+    //        }
+    //    }
+    //
+    //    func updateTodo(todo: TodoObject, completionHandler: @escaping (Result<Bool, CoreDataError>) -> ()){
+    //        fetchFirstObject(todo: todo) { result in
+    //            switch result{
+    //            case .success(let managedObject):
+    //                self.update(nsManagedObject: managedObject as! TodoMO, todo: todo)
+    //                self.saveData(completionHandler: completionHandler)
+    //            case .failure(let error):
+    //                completionHandler(.failure(error))
+    //            }
+    //        }
+    //    }
+    //
+    //
+    //    private func saveData(completionHandler: @escaping (Result<Bool, CoreDataError>) -> ()){
+    //        if persistentStore.managedContext.hasChanges {
+    //            do {
+    //                try persistentStore.managedContext.save()
+    //                print("Data saved successfully")
+    //                completionHandler(.success(true))
+    //
+    //            } catch {
+    //                completionHandler(.failure(.saveDataError(error)))
+    //            }
+    //        }
+    //    }
+    //
+    //    private func fetchFirstObject<T: NSManagedObject>(todo: TodoObject, completionHandler: @escaping (Result<T?, CoreDataError>) -> ()){
+    ////        let fetchRequest = NSFetchRequest<T>(entityName: "TodoMO")
+    //        let fetchRequest = TodoMO.self.fetchRequest()
+    //        fetchRequest.predicate = NSPredicate(format: "id = %@", todo.id as CVarArg)
+    //        fetchRequest.fetchLimit = 1
+    //        do {
+    //            let todoResult = try persistentStore.managedContext.fetch(fetchRequest) as! [T]
+    //            completionHandler(.success(todoResult.first))
+    //        } catch let error {
+    //            completionHandler(.failure(.fetchFirstError(error)))
+    //        }
+    //    }
 }

@@ -7,30 +7,49 @@
 
 import XCTest
 @testable import TodosMVVMWithCoreData
+import CoreData
 
 final class TodosMVVMWithCoreDataTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    var persistentStore: PersistentStore!
+    var todosDatasource: TodosDatasourceProtocol!
+    var todoObjects: [TodoObject] = []
+    
+    override func setUp() {
+        //        super.setUp()
+        persistentStore = PersistentStore()
+        todosDatasource = TodosDatasource(persistentStore: persistentStore)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+ 
+    func test_Create_Todo(){
+        DispatchQueue.main.async {
+            Task{
+                do{
+                    let result = try await self.todosDatasource.createTodo(todo: TodoObject(id: UUID(), name: "todo test", date: Date()))
+                    XCTAssertEqual(result, true)
+                }catch{
+                    fatalError("Error")
+                }
+            }
         }
     }
-
+    
+    func test_Update_Todo() throws{
+        DispatchQueue.main.async {
+            Task{
+                var todoObject =  TodoObject(id: UUID(), name: "todo test", date: Date())
+                _ = try await self.todosDatasource.createTodo(todo: todoObject)
+                todoObject.name = "todo test updated"
+                let result = try await self.todosDatasource.updateTodo(todo: todoObject)
+                XCTAssertEqual(result, true)
+            }
+        }
+    }
+    
+    override func tearDownWithError() throws {
+        persistentStore = nil
+        todosDatasource = nil
+        todoObjects = []
+    }
+    
 }
